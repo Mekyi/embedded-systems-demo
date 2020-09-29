@@ -18,13 +18,20 @@ This project is intended to demo an embedded system with a Raspberry Pi and Sens
 
 ## Running the Demo
 
-Install the Python3-venv package
+Install Sense Hat and Python3-venvpackages:
 
 ```shell
+$ sudo apt-get install sense-hat -y
 $ sudo apt-get install python3-venv -y
 ```
 
-Clone this repository to your Raspberry Pi
+Reboot if necessary:
+
+```shell
+$ sudo reboot
+```
+
+Clone this repository to your Raspberry Pi:
 
 ```shell
 $ git clone https://github.com/Mekyi/embedded-systems-demo.git
