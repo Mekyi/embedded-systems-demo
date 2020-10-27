@@ -5,7 +5,6 @@ This project is intended to demo an embedded system with a Raspberry Pi and Sens
 
 - Raspberry Pi (with Debian Buster based OS)
 - Sense HAT
-- Python3-venv (virtual environment)
 
 ## Sense HAT Sensors
 
@@ -18,20 +17,15 @@ This project is intended to demo an embedded system with a Raspberry Pi and Sens
 
 ## Running the Demo
 
-Install Sense Hat and Python3-venvpackages:
+Install the Sense Hat software in case it isn't already:
 
 ```shell
+$ sudo apt-get update
 $ sudo apt-get install sense-hat -y
-$ sudo apt-get install python3-venv -y
-```
-
-Reboot if necessary:
-
-```shell
 $ sudo reboot
 ```
 
-Clone this repository to your Raspberry Pi:
+Clone this repository:
 
 ```shell
 $ git clone https://github.com/Mekyi/embedded-systems-demo.git
@@ -43,42 +37,8 @@ Locate inside the project folder:
 $ cd embedded-systems-demo
 ```
 
-### Activating the virtual environment
-
-Activates virtual environment. If virtual environment doesn't already exist, it is created with required packages:
+Install required Python packages:
 
 ```shell
-$ source activate
-```
-
-## Package management
-
-List installed packages:
-
-```shell
-(python3-virtualenv) $ pip list
-```
-
-Installing requirements manually. This is done automatically when activating the virtual environment for the first time:
-
-```shell
-(python3-virtualenv) $ pip install -r requirements.txt
-```
-
-Saving list of installed packages in the requirements.txt file:
-
-```shell
-(python3-virtualenv) $ pip freeze > requirements.txt
-```
-
-Installing new packages:
-
-```shell
-(python3-virtualenv) $ pip install <package name>
-```
-
-### Deactivating the virtual environment
-
-```shell
-(python3-virtualenv) $ deactivate
+$ pip install -r requirements.txt
 ```
