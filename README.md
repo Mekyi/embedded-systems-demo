@@ -5,6 +5,7 @@ This project is intended to demo an embedded system with a Raspberry Pi and Sens
 
 - Raspberry Pi (with Debian Buster based OS)
 - Sense HAT
+- Python (>3.7) 
 
 ## Sense HAT Sensors
 
@@ -40,5 +41,5 @@ $ cd embedded-systems-demo
 Install required Python packages:
 
 ```shell
-$ pip install -r requirements.txt
+$ sudo pip3 install -r requirements.txt
 ```
