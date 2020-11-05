@@ -1,6 +1,7 @@
 import paho.mqtt.client as mqtt
 import os
 import time
+import json
 from sense_hat import SenseHat
 
 
@@ -14,7 +15,7 @@ HOST = os.environ['HOST']
 PORT = 443
 CREDENTIALS = {
     'USER': os.environ['USER'],
-    'PASS': os.environ['PASSWORD'],
+    'PASS': os.environ['PASSWORD']
 }
 
 
@@ -83,40 +84,37 @@ def get_sensehat_data():
 
     return sensehat_data
 
-# MQTT callbacks
+# MQTT callback functions
 def on_connect(client, userdata, flags, rc):
     print(f'Connected to broker with result code: {rc}')
 
 def on_disconnect(client, userdata, rc):
     if rc != 0:
-        print(f'Disconnected')
+        print('Disconnected')
     else:
         print('Unexpected disconnection')
 
 def on_publish(client, userdata, mid):
     print('Message published')
-
-def on_message(client, userdata, msg):
-    print(f'{msg.topic}: {str(msg.payload)}')
     
 def on_log(client, userdata, level, buf):
     print(f'Log: {buf}')
 
-
-# Initialize Sense Hat
-sense = SenseHat()
 
 # Create MQTT client and attach callback functions
 client = mqtt.Client(transport='websockets')
 client.on_connect = on_connect
 client.on_disconnect = on_disconnect
 client.on_publish = on_publish
-client.on_message = on_message
 client.on_log = on_log
 
 # Configure MQTT client
+client.tls_set('/etc/ssl/certs/DST_Root_CA_X3.pem')
 client.username_pw_set(CREDENTIALS['USER'], CREDENTIALS['PASS'])
 client.ws_set_options(path='/mqtt/')
+
+# Initialize Sense Hat
+sense = SenseHat()
 
 # Connect to MQTT broker
 print(f"Connecting to {HOST}:{PORT} with user {CREDENTIALS['USER']}...")
@@ -127,7 +125,7 @@ client.loop_start()
 
 # Program loop
 while True:
-    client.publish(f"{GATEWAY_ID}/sense", json.dumps(get_sensehat_data()))
+    client.publish(f'{GATEWAY_ID}/sensehat', json.dumps(get_sensehat_data()))
     time.sleep(INTERVAL)
 
 client.loop_stop()
